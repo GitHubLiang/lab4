@@ -1,0 +1,42 @@
+#include <cstdio>
+#include <cstring>
+#include <algorithm>
+using namespace std;
+const int MAXN = 3005;
+int p[MAXN],n,cnt,t[MAXN];
+void mrg(int l, int r)
+{
+    int mid = (l + r) >> 1;
+    int i = l, j = mid + 1, k = 0;
+    while(i<=mid && j<=r)
+        if(p[i]<p[j])   t[k++] = p[i++];
+        else
+        {
+            t[k++] = p[j++];
+            cnt += mid - i + 1;
+        }
+    if(i>mid)
+        while(j<=r) t[k++] = p[j++];
+    else
+        while(i<=mid)   t[k++] = p[i++];
+    for(i=0;i<k;i++)
+        p[l+i] = t[i];
+}
+void srt(int l, int r)
+{
+    if(l<r)
+    {
+        int mid = (l + r) >> 1;
+        srt(l, mid);
+        srt(mid+1,r);
+        mrg(l,r);
+    }
+}
+int main()
+{
+    scanf("%d",&n);
+    for(int i=0;i<n;i++)
+        scanf("%d",p+i);
+    srt(0, n-1);
+    printf("%.6lf\n",(double)((cnt&1)?((cnt<<1)-1):cnt<<1));
+}
