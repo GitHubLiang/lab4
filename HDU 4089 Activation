@@ -1,0 +1,49 @@
+#include <cstring>
+#include <algorithm>
+#include <cstdio>
+using namespace std;
+const int MAXN = 2005;
+const double EPS = 1e-6;
+int m,n,k;
+double p1,p2,p3,p4;
+double c[MAXN], d[MAXN], a, b, dp[MAXN][MAXN];
+int main()
+{
+    while(scanf("%d%d%d%lf%lf%lf%lf",&n,&m,&k,&p1,&p2,&p3,&p4)==7)
+    {
+        if(p4<EPS)
+        {
+            printf("0.00000\n");
+            continue;
+        }
+        a = p2/(1-p1);
+        b = p4/(1-p1);
+        double p31 = p3/(1-p1);
+        dp[1][1] = b/(1-a);
+        for(int i=2;i<=n;i++)
+        {
+            for(int j=1;j<i;j++)
+                c[j] = p31*dp[i-1][j],d[j] = c[j] + b;
+            double tmp = 0, exp = 1;
+            for(int j=i-1;j>0;j--)
+            {
+                if(j>=k)
+                    tmp += exp*c[j];
+                else
+                    tmp += exp*d[j];
+                exp *= a;
+            }
+            tmp += exp*b;
+            exp *= a;
+            dp[i][i] = tmp/(1-exp);
+            dp[i][1] = a*dp[i][i] + b;
+            for(int j=2;j<i;j++)
+            {
+                if(j<=k)    dp[i][j] = a*dp[i][j-1] + d[j-1];
+                else        dp[i][j] = a*dp[i][j-1] + c[j-1];
+            }
+        }
+        printf("%.5lf\n",dp[n][m]);
+
+    }
+}
