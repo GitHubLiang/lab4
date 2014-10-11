@@ -72,4 +72,4 @@ int main()
             printf("%d\n",sum(r[num])-sum(l[num]-1));
     }
 }
-//modified from B3
+//merge C4 to B3

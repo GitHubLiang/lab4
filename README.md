@@ -1,4 +1,3 @@
 lab4
 ====
-B3, from master
-modified from B3
+merge C4 to B3

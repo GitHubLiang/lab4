@@ -73,4 +73,4 @@ int main()
         printf("%d\n",ans);
     }
 }
-// modified from B3
+//merge C4 to B3
