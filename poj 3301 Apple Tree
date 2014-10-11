@@ -72,3 +72,4 @@ int main()
             printf("%d\n",sum(r[num])-sum(l[num]-1));
     }
 }
+//C4
