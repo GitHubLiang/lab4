@@ -1,3 +1,4 @@
 lab4
 ====
-B3, fron master
+B3, from master
+modified from B3
